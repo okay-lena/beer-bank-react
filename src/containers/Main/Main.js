@@ -31,6 +31,34 @@ class Main extends Component {
         "ibu": 41.5,
         "ebc": 15,
         "food_pairing": ["Fresh crab with lemon", "Garlic butter dipping sauce", "Goats cheese salad", "Creamy lemon bar doused in powdered sugar"]
+      },
+      {
+        "id" : 3,
+        "name" : "Berliner Weisse With Yuzu - B-Sides",
+        "tagline" : "Japanese Citrus Berliner Weisse.",
+        "first_brewed" : "11/2015",
+        "description" : "Japanese citrus fruit intensifies the sour nature of this German classic.",
+        "image_url" : "https://images.punkapi.com/v2/keg.png",
+        "abv" : 4.2,
+        "ibu" : 8,
+        "ebc" : 8,
+        "food_pairing" : [
+          "Smoked chicken wings", "Miso ramen", "Yuzu cheesecake"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Pilsen Lager",
+        "tagline": "Unleash the Yeast Series.",
+        "first_brewed": "09/2013",
+        "description": "Our Unleash the Yeast series was an epic experiment into the differences in aroma and flavour provided by switching up your yeast. We brewed up a wort with a light caramel note and some toasty biscuit flavour, and hopped it with Amarillo and Centennial for a citrusy bitterness. Everything else is down to the yeast. Pilsner yeast ferments with no fruity esters or spicy phenols, although it can add a hint of butterscotch.",
+        "image_url": "https://images.punkapi.com/v2/4.png",
+        "abv": 6.3,
+        "ibu": 55,
+        "ebc": 30,
+        "food_pairing": [
+          "Spicy crab cakes", "Spicy cucumber and carrot Thai salad", "Sweet filled dumplings"
+        ]
       }
     ]
   }
@@ -61,7 +89,7 @@ class Main extends Component {
           <h1>The Beer Bank</h1>
           <p>Find your favorite beer here</p>
         </header>
-        <div className="container">
+        <div className= {classes.container}>
           <BeersList
             beers = {this.state.beers}
             favoriteBeers = {this.state.favoriteBeers}

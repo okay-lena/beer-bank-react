@@ -11,8 +11,50 @@ header {
 }
 
 .container {
+  display: flex;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
   width: 850px;
+}
+
+/* media queries */
+@media (min-width: 1200px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 850px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 850px;
+    }
+}
+
+@media (max-width: 815px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 785px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 550px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 270px;
+    }
 }
