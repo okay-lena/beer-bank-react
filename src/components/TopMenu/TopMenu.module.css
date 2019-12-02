@@ -1,6 +1,10 @@
 .TopMenu {
   background-color: orange;
   overflow: hidden;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  width: auto;
 }
 
 .TopMenu a {
