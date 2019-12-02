@@ -11,7 +11,6 @@ const BeersList = props => {
             beer = {beer}
             favoriteBeers = {props.favoriteBeers}
             key = {index}
-            onBeerCardClick = {props.onBeerCardClick}
             onStarClick = {props.onStarClick}
           />
         )

@@ -6,7 +6,6 @@ import BeersList from '../../components/BeersList/BeersList'
 class Main extends Component {
   state = {
     showFavorites: false,
-    showBeerModal: false,
     favoriteBeers: [],  // beer IDs
     beers: [
       {
@@ -36,9 +35,6 @@ class Main extends Component {
     ]
   }
 
-  onBeerCardClickHandler = (beerId) => {
-    console.log(beerId)
-  }
 
   onStarClickHandler = (event, beerId) => {
     if ( this.state.favoriteBeers.includes(beerId) ) {
@@ -69,7 +65,6 @@ class Main extends Component {
           <BeersList
             beers = {this.state.beers}
             favoriteBeers = {this.state.favoriteBeers}
-            onBeerCardClick = {this.onBeerCardClickHandler}
             onStarClick = {this.onStarClickHandler}
           />
         </div>
