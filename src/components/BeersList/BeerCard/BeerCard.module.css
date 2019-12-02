@@ -19,11 +19,6 @@
   float: right;
 }
 
-/* how to make .fas orange? */
-i {
-  color: orange;
-}
-
 .BeerCard img {
   max-height: 100px;
   max-width: 100px;
@@ -42,6 +37,7 @@ i {
 }
 
 .modalBeerdetails {
+  color: #777;
   font-family: 'Montserrat';
 }
 
@@ -93,4 +89,8 @@ i {
 
 .bestServed {
     display: block;
+}
+
+h2 {
+  color: orange;
 }

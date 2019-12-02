@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import classes from './BeerCard.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons' //regular star
+import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons' // solid star
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Container, Row, Col } from 'reactstrap';
 
 const BeerCard = props => {
-  let starClass = "";
-
+  let starIcon = "";
   if ( props.favoriteBeers.includes(props.beer.id) ) {
-    starClass = "fas fa-star"
+    starIcon = <FontAwesomeIcon icon={fasFaStar} color="orange" />
   } else {
-    starClass = "far fa-star"
+    starIcon = <FontAwesomeIcon icon={farFaStar} color="#777" />
   }
 
   const [modal, setModal] = useState(false);
@@ -18,10 +20,9 @@ const BeerCard = props => {
   return (
     <div className={classes.BeerCard} onClick={toggle}>
       <span className={classes.BeerCardId}>{props.beer.id}</span>
-      <span className={classes.BeerCardStar}>
-        <i className={starClass}
-          onClick = {(event) => props.onStarClick(event, props.beer.id)}
-           />
+      <span className={classes.BeerCardStar}
+        onClick = {(event) => props.onStarClick(event, props.beer.id)}>
+        {starIcon}
       </span>
       <img src={props.beer.image_url} alt={props.beer.name} />
       <span className={classes.BeerCardName}>{props.beer.name}</span>
