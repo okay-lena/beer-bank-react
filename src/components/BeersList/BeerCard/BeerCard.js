@@ -46,7 +46,11 @@ const BeerCard = props => {
                         <span className={classes.ebc}><b>EBC:</b> {props.beer.ebc}</span>
                         <span className={classes.description}>{props.beer.description}</span>
                         <span className={classes.bestServed}><b>Best served with:</b></span>
-                        <ul className={classes.foodPairing}></ul>
+                        <ul className={classes.foodPairing}>
+                          {props.beer.food_pairing.map((food, index) =>
+                            <li className={classes.food} key={index}>{food}</li>
+                          )}
+                        </ul>
                       </Col>
                   </Row>
                   <Row>
