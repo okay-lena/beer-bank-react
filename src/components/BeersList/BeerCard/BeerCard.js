@@ -16,6 +16,11 @@ const BeerCard = props => {
     props.showModalWindow(props.beer.id)
   }
 
+  // generate 3 random beer IDs
+  let randomBeerIDs = []
+  for (let i = 0; i < 3; i++) {
+      randomBeerIDs.push(Math.floor(Math.random() * props.beers.length));
+  }
 
   return (
     <div className={classes.BeerCard} onClick={showModalWindow}>

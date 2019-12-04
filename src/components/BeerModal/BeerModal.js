@@ -42,6 +42,15 @@ const BeerModal = (props) => {
             </Row>
             <Row>
                 <span><h2>You might also like:</h2></span>
+                <RandomBeers
+                  showModalWindow = {props.showModalWindow}
+                  hideModalWindow = {props.hideModalWindow}
+                  modalWindow = {this}
+                  beer = {beer}
+                  favoriteBeers = {props.favoriteBeers}
+                  onStarClick = {props.onStarClick}
+                  beers = {props.beers}
+                />
             </Row>
           </Container>
       </ModalBody>
