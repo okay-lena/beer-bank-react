@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './Main.module.css'
 import TopMenu from '../../components/TopMenu/TopMenu'
 import BeersList from '../../components/BeersList/BeersList'
+import BeerModal from '../../components/BeerModal/BeerModal'
 
 class Main extends Component {
   state = {
@@ -18,7 +19,11 @@ class Main extends Component {
         "abv": 4.5,
         "ibu": 60,
         "ebc": 20,
-        "food_pairing": ["Spicy chicken tikka masala", "Grilled chicken quesadilla", "Caramel toffee cake"]
+        "food_pairing": [
+          "Spicy chicken tikka masala",
+          "Grilled chicken quesadilla",
+          "Caramel toffee cake"
+        ]
       },
       {
         "id": 2,
@@ -30,7 +35,12 @@ class Main extends Component {
         "abv": 4.1,
         "ibu": 41.5,
         "ebc": 15,
-        "food_pairing": ["Fresh crab with lemon", "Garlic butter dipping sauce", "Goats cheese salad", "Creamy lemon bar doused in powdered sugar"]
+        "food_pairing": [
+          "Fresh crab with lemon",
+          "Garlic butter dipping sauce",
+          "Goats cheese salad",
+          "Creamy lemon bar doused in powdered sugar"
+        ]
       },
       {
         "id" : 3,
@@ -42,9 +52,7 @@ class Main extends Component {
         "abv" : 4.2,
         "ibu" : 8,
         "ebc" : 8,
-        "food_pairing" : [
-          "Smoked chicken wings", "Miso ramen", "Yuzu cheesecake"
-        ]
+        "food_pairing" : [ "Smoked chicken wings", "Miso ramen", "Yuzu cheesecake" ]
       },
       {
         "id": 4,
@@ -56,13 +64,38 @@ class Main extends Component {
         "abv": 6.3,
         "ibu": 55,
         "ebc": 30,
-        "food_pairing": [
-          "Spicy crab cakes", "Spicy cucumber and carrot Thai salad", "Sweet filled dumplings"
-        ]
+        "food_pairing": [ "Spicy crab cakes", "Spicy cucumber and carrot Thai salad", "Sweet filled dumplings" ]
       }
-    ]
+    ],
+    modalWindowState : {
+      currentBeerId: 1,
+      isShown: false
+    }
   }
 
+  showModalWindow = (currentBeerId) => {
+    this.setState({
+      modalWindowState : {
+        isShown: true,
+        currentBeerId: currentBeerId
+      }
+    })
+  }
+
+  hideModalWindow = () => {
+    this.setState({
+      modalWindowState : {
+        isShown: false,
+        currentBeerId: 1
+      }
+    })
+  }
+
+  toggleModalWindow = () => {
+    if (this.state.modalWindowState.isShown) {
+      this.hideModalWindow()
+    }
+  }
 
   onStarClickHandler = (event, beerId) => {
     if ( this.state.favoriteBeers.includes(beerId) ) {
@@ -83,7 +116,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div className = {classes.Main}>
+      <div className = {classes.Main} onClick={this.toggleModalWindow}>
         <TopMenu />
         <header>
           <h1>The Beer Bank</h1>
@@ -94,6 +127,17 @@ class Main extends Component {
             beers = {this.state.beers}
             favoriteBeers = {this.state.favoriteBeers}
             onStarClick = {this.onStarClickHandler}
+            showModalWindow = {this.showModalWindow}
+            hideModalWindow = {this.hideModalWindow}
+          />
+        <BeerModal
+          beerId = {this.state.modalWindowState.currentBeerId}
+          favoriteBeers = {this.state.favoriteBeers}
+          onStarClick = {this.state.onStarClick}
+          beers = {this.state.beers}
+          isShown = {this.state.modalWindowState.isShown}
+          showModalWindow = {this.showModalWindow}
+          hideModalWindow = {this.hideModalWindow}
           />
         </div>
       </div>

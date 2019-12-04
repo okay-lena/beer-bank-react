@@ -12,10 +12,15 @@ const BeersList = props => {
             favoriteBeers = {props.favoriteBeers}
             key = {index}
             onStarClick = {props.onStarClick}
+            beers = {props.beers}
+            showModalWindow = {props.showModalWindow}
+            hideModalWindow = {props.hideModalWindow}
           />
         )
       }) }
+
     </div>
+
   )
 }
 
