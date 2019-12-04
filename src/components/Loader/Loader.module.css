@@ -1,5 +1,6 @@
 .center {
   text-align: center;
+  padding-top: 100px;
 }
 
 .Loader {
@@ -13,7 +14,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
+  background: orange;
   animation: lds-grid 1.2s linear infinite;
 }
 .Loader div:nth-child(1) {
