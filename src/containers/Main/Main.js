@@ -19,6 +19,23 @@ class Main extends Component {
     }
   }
 
+  loadFavoriteBeersFromLocalStorage = () => {
+    // check if favorite beers exists in localStorage
+    if ( localStorage.getItem("favoriteBeersLS") ) {
+      this.setState({
+        favoriteBeers: this.state.favoriteBeers.splice(0, this.state.favoriteBeers.length)
+      })
+      // if there are some ids in LS, put them to favoriteBeers state
+      let favBeersFromLocalStorage = JSON.parse(localStorage.getItem("favoriteBeersLS"))
+      for (let beerId of favBeersFromLocalStorage) {
+        this.state.favoriteBeers.push(beerId)
+      }
+      this.setState({
+          favoriteBeers: this.state.favoriteBeers
+      })
+    }
+  }
+
   async componentDidMount() {
     try {
       const response = await axios.get('https://api.punkapi.com/v2/beers')
@@ -26,6 +43,7 @@ class Main extends Component {
         beers: response.data,
         beersAreLoading: false
       })
+      this.loadFavoriteBeersFromLocalStorage()
     } catch (e) {
       console.log(e)
     }
@@ -50,19 +68,53 @@ class Main extends Component {
   }
 
   onStarClickHandler = (event, beerId) => {
-    if ( this.state.favoriteBeers.includes(beerId) ) {
-      // remove from favoriteBeers and update state
-      this.state.favoriteBeers.splice(this.state.favoriteBeers.indexOf(beerId), 1)
-      this.setState({
-          favoriteBeers: this.state.favoriteBeers
-      })
-    } else {
-      // add beerId to update favoriteBeers and state
+    // check if favorite beers does not exist in localStorage
+    if (localStorage.getItem("favoriteBeersLS") === null) {
+      // add beer id to state & update favorite status
       this.state.favoriteBeers.push(beerId)
       this.setState({
-          favoriteBeers: this.state.favoriteBeers
+        favoriteBeers: this.state.favoriteBeers
       })
+      // add beer id to localStorage
+      localStorage.setItem("favoriteBeersLS", JSON.stringify(this.state.favoriteBeers))
+    } else {
+      // null favoriteBeers state, we'll populate it later
+      this.loadFavoriteBeersFromLocalStorage()
+
+      // if beer is favorite
+      if ( this.state.favoriteBeers.includes(beerId) ) {
+        // remove from favoriteBeers state
+        this.state.favoriteBeers.splice(this.state.favoriteBeers.indexOf(beerId), 1)
+        this.setState({
+            favoriteBeers: this.state.favoriteBeers
+        })
+        // update LS
+        localStorage.setItem("favoriteBeersLS", JSON.stringify(this.state.favoriteBeers))
+      } else {
+        // add beerId to favoriteBeers state
+        this.state.favoriteBeers.push(beerId)
+        this.setState({
+            favoriteBeers: this.state.favoriteBeers
+        })
+        // update LS
+        localStorage.setItem("favoriteBeersLS", JSON.stringify(this.state.favoriteBeers))
+      }
     }
+
+
+    // if ( this.state.favoriteBeers.includes(beerId) ) {
+    //   // remove from favoriteBeers and update state
+    //   this.state.favoriteBeers.splice(this.state.favoriteBeers.indexOf(beerId), 1)
+    //   this.setState({
+    //       favoriteBeers: this.state.favoriteBeers
+    //   })
+    // } else {
+    //   // add beerId to update favoriteBeers and state
+    //   this.state.favoriteBeers.push(beerId)
+    //   this.setState({
+    //       favoriteBeers: this.state.favoriteBeers
+    //   })
+    // }
     event.stopPropagation()
   }
 
