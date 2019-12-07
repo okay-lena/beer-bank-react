@@ -19,6 +19,16 @@ class Main extends Component {
     }
   }
 
+  addIsHiddenFalseToBeer = () => {
+    const beersCopy = this.state.beers.concat()
+    for (let beer of beersCopy) {
+      beer.isHidden = false
+    }
+    this.setState({
+      beers: beersCopy
+    })
+  }
+
   loadFavoriteBeersFromLocalStorage = () => {
     // check if favorite beers exists in localStorage
     if ( localStorage.getItem("favoriteBeersLS") ) {
@@ -44,6 +54,7 @@ class Main extends Component {
         beersAreLoading: false
       })
       this.loadFavoriteBeersFromLocalStorage()
+      this.addIsHiddenFalseToBeer()
     } catch (e) {
       console.log(e)
     }
@@ -65,6 +76,40 @@ class Main extends Component {
         currentBeerId: 1
       }
     })
+  }
+
+  showFavorites = (event) => {
+    event.preventDefault()
+    const favoriteBeers = this.state.favoriteBeers
+    const beersCopy = this.state.beers.concat()
+
+    beersCopy.forEach((beer) => {
+      for (let beerProperty in beer) {
+        if ( beerProperty === 'id' && favoriteBeers.find(beerId => beerId === beer.id) ) {
+          beer.isHidden = false
+          this.setState({
+            beers: beersCopy
+          })
+        } else if ( beerProperty === 'id' && !favoriteBeers.find(beerId => beerId === beer.id) ) {
+          beer.isHidden = true
+          this.setState({
+            beers: beersCopy
+          })
+        }
+      }
+    })
+  }
+
+  showAllBeers = (event) => {
+    event.preventDefault()
+    const beersCopy = this.state.beers.concat()
+
+    beersCopy.forEach((beer) => {
+      beer.isHidden = false
+          this.setState({
+            beers: beersCopy
+          })
+      })
   }
 
   onStarClickHandler = (event, beerId) => {
@@ -121,7 +166,12 @@ class Main extends Component {
   render() {
     return (
       <div className = {classes.Main}>
-        <TopMenu />
+        <TopMenu
+          beers = {this.state.beers}
+          favoriteBeers = {this.state.favoriteBeers}
+          showFavorites = {this.showFavorites}
+          showAllBeers = {this.showAllBeers}
+          />
         <header>
           <h1>The Beer Bank</h1>
           <p>Find your favorite beer here</p>

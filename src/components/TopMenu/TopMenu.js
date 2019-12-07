@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './TopMenu.module.css'
 
-const TopMenu = () => {
+const TopMenu = props => {
   return (
   <div className={classes.TopMenu}>
-    <a href="#Home">Home</a>
-    <a href="#Favorites">Favorites</a>
+    <a href="#Home" onClick={(event) => props.showAllBeers(event)}>Home</a>
+    <a href="#Favorites" onClick={(event) => props.showFavorites(event)}>Favorites</a>
   </div>
 )}
 
