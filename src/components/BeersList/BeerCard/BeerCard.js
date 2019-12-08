@@ -10,7 +10,6 @@ const BeerCard = props => {
   if (props.beer.isHidden) {
     cardClasses.push('isHidden')
   }
-  //console.log(cardClasses.join(' '));
 
   let starIcon = "";
   if ( props.favoriteBeers.includes(props.beer.id) ) {

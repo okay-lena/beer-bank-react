@@ -9,23 +9,22 @@ import Loader from '../../components/Loader/Loader'
 
 class Main extends Component {
   state = {
-    showFavorites: false,
     beersAreLoading: true,
     favoriteBeers: [],  // beer IDs
-    beers: [],
+    allBeers: [],
     modalWindowState : {
       currentBeerId: 1,
       isShown: false
     }
   }
 
-  addIsHiddenFalseToBeer = () => {
-    const beersCopy = this.state.beers.concat()
+  addIsHiddenFalseToAllBeers = () => {
+    const beersCopy = this.state.allBeers.concat()
     for (let beer of beersCopy) {
       beer.isHidden = false
     }
     this.setState({
-      beers: beersCopy
+      allBeers: beersCopy
     })
   }
 
@@ -50,11 +49,11 @@ class Main extends Component {
     try {
       const response = await axios.get('https://api.punkapi.com/v2/beers')
       this.setState({
-        beers: response.data,
+        allBeers: response.data,
         beersAreLoading: false
       })
       this.loadFavoriteBeersFromLocalStorage()
-      this.addIsHiddenFalseToBeer()
+      this.addIsHiddenFalseToAllBeers()
     } catch (e) {
       console.log(e)
     }
@@ -81,19 +80,19 @@ class Main extends Component {
   showFavorites = (event) => {
     event.preventDefault()
     const favoriteBeers = this.state.favoriteBeers
-    const beersCopy = this.state.beers.concat()
+    const beersCopy = this.state.allBeers.concat()
 
     beersCopy.forEach((beer) => {
       for (let beerProperty in beer) {
         if ( beerProperty === 'id' && favoriteBeers.find(beerId => beerId === beer.id) ) {
           beer.isHidden = false
           this.setState({
-            beers: beersCopy
+            allBeers: beersCopy
           })
         } else if ( beerProperty === 'id' && !favoriteBeers.find(beerId => beerId === beer.id) ) {
           beer.isHidden = true
           this.setState({
-            beers: beersCopy
+            allBeers: beersCopy
           })
         }
       }
@@ -102,14 +101,14 @@ class Main extends Component {
 
   showAllBeers = (event) => {
     event.preventDefault()
-    const beersCopy = this.state.beers.concat()
+    const beersCopy = this.state.allBeers.concat()
 
     beersCopy.forEach((beer) => {
       beer.isHidden = false
-          this.setState({
-            beers: beersCopy
-          })
+      this.setState({
+        allBeers: beersCopy
       })
+    })
   }
 
   onStarClickHandler = (event, beerId) => {
@@ -167,7 +166,7 @@ class Main extends Component {
     return (
       <div className = {classes.Main}>
         <TopMenu
-          beers = {this.state.beers}
+          allBeers = {this.state.allBeers}
           favoriteBeers = {this.state.favoriteBeers}
           showFavorites = {this.showFavorites}
           showAllBeers = {this.showAllBeers}
@@ -182,7 +181,7 @@ class Main extends Component {
           :
           <div className= {classes.container}>
             <BeersList
-              beers = {this.state.beers}
+              allBeers = {this.state.allBeers}
               favoriteBeers = {this.state.favoriteBeers}
               onStarClick = {this.onStarClickHandler}
               showModalWindow = {this.showModalWindow}
@@ -192,7 +191,7 @@ class Main extends Component {
               beerId = {this.state.modalWindowState.currentBeerId}
               favoriteBeers = {this.state.favoriteBeers}
               onStarClick = {this.onStarClickHandler}
-              beers = {this.state.beers}
+              allBeers = {this.state.allBeers}
               isShown = {this.state.modalWindowState.isShown}
               showModalWindow = {this.showModalWindow}
               hideModalWindow = {this.hideModalWindow}

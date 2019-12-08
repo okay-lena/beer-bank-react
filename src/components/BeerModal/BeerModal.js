@@ -6,9 +6,10 @@ import RandomBeers from './RandomBeers/RandomBeers'
 
 const BeerModal = (props) => {
 
+  // console.log(props.allBeers)
   const getBeerById = (id) => {
-   for (let i = 0; i < props.beers.length; i++){
-     if (props.beers[i].id === id) return props.beers[i]
+   for (let i = 0; i < props.allBeers.length; i++){
+     if (props.allBeers[i].id === id) return props.allBeers[i]
    }
    return null;
  }
@@ -16,7 +17,7 @@ const BeerModal = (props) => {
   const beer = getBeerById(props.beerId)
 
   return (
-    <Modal isOpen={props.isShown} toggle={props.hideModalWindow} className={classes.BeerModal}>
+    <Modal style={{maxWidth: 800}} isOpen={props.isShown} toggle={props.hideModalWindow} className={classes.BeerModal}>
     <ModalHeader style={{borderBottom: 0}}></ModalHeader>
       <ModalBody>
         <Container>
@@ -47,9 +48,9 @@ const BeerModal = (props) => {
                   hideModalWindow = {props.hideModalWindow}
                   modalWindow = {this}
                   beer = {beer}
+                  allBeers = {props.allBeers}
                   favoriteBeers = {props.favoriteBeers}
                   onStarClick = {props.onStarClick}
-                  beers = {props.beers}
                 />
             </Row>
           </Container>

@@ -3,26 +3,28 @@ import classes from './RandomBeers.module.css'
 import BeerCard from '../../BeersList/BeerCard/BeerCard'
 
 const RandomBeers = props => {
-  let randomBeerIDs = []
+  let randomBeerIndices = []
   for (let i = 0; i < 3; i++) {
-      randomBeerIDs.push(Math.floor(Math.random() * props.beers.length));
+      randomBeerIndices.push(
+        Math.floor(Math.random() * props.allBeers.length)
+        );
   }
-
+  // console.log(props.beers);
   return (
     <div className={classes.RandomBeers}>
-      {randomBeerIDs.map((id, index) =>
+      {randomBeerIndices.map((index, key) =>
         <BeerCard
           modalWindow = {props.modalWindow}
-          beer = {props.beers[id]}
-          key = {index}
+          beer = {props.allBeers[index]}
+          allBeers = {props.allBeers}
+          key = {key}
           favoriteBeers = {props.favoriteBeers}
           onStarClick = {props.onStarClick}
-          beers = {props.beers}
           showModalWindow = {props.showModalWindow}
           hideModalWindow = {props.hideModalWindow}
         />
-    )}
-  </div>
+      )}
+    </div>
   )
 }
 
