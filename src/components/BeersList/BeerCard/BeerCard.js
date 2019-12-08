@@ -1,10 +1,17 @@
 import React from 'react';
-import classes from './BeerCard.module.css'
+import './BeerCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons' //regular star
 import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons' // solid star
 
 const BeerCard = props => {
+
+  const cardClasses = ['BeerCard']
+  if (props.beer.isHidden) {
+    cardClasses.push('isHidden')
+  }
+  //console.log(cardClasses.join(' '));
+
   let starIcon = "";
   if ( props.favoriteBeers.includes(props.beer.id) ) {
     starIcon = <FontAwesomeIcon icon={fasFaStar} color="orange" />
@@ -16,22 +23,16 @@ const BeerCard = props => {
     props.showModalWindow(props.beer.id)
   }
 
-  // generate 3 random beer IDs
-  let randomBeerIDs = []
-  for (let i = 0; i < 3; i++) {
-      randomBeerIDs.push(Math.floor(Math.random() * props.beers.length));
-  }
-
   return (
-    <div className={classes.BeerCard} onClick={showModalWindow}>
-      <span className={classes.BeerCardId}>{props.beer.id}</span>
-      <span className={classes.BeerCardStar}
+    <div className={cardClasses.join(' ')} onClick={showModalWindow}>
+      <span className='BeerCardId'>{props.beer.id}</span>
+      <span className='BeerCardStar'
         onClick = {(event) => props.onStarClick(event, props.beer.id)}>
         {starIcon}
       </span>
       <img src={props.beer.image_url} alt={props.beer.name} />
-      <span className={classes.BeerCardName}>{props.beer.name}</span>
-      <span className={classes.BeerCardTagline}>{props.beer.tagline}</span>
+      <span className='BeerCardName'>{props.beer.name}</span>
+      <span className='BeerCardTagline'>{props.beer.tagline}</span>
     </div>
 )}
 

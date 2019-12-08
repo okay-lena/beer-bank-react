@@ -11,6 +11,15 @@
   transition: transform 133ms;
 }
 
+.BeerCard:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px grey;
+}
+
+.BeerCard.isHidden {
+  display: none;  /* just to test */
+}
+
 .BeerCardId {
   display: none;
 }
