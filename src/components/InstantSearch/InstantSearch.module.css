@@ -1,0 +1,17 @@
+.InstantSearch {
+
+}
+
+form input {
+  padding-left: 5px;
+}
+
+.advancedSearchLink {
+  margin-top: 20px;
+  display: block;
+}
+
+.advancedSearchLink a {
+    color: #fff;
+    text-decoration: underline;
+}

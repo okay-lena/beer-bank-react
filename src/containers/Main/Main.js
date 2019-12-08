@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Main.module.css'
 import TopMenu from '../../components/TopMenu/TopMenu'
+import InstantSearch from '../../components/InstantSearch/InstantSearch'
 import BeersList from '../../components/BeersList/BeersList'
 import BeerModal from '../../components/BeerModal/BeerModal'
 import axios from 'axios'
@@ -162,6 +163,28 @@ class Main extends Component {
     event.stopPropagation()
   }
 
+  instantlySearchForBeer = (event) => {
+    let beerToFind = event.target.value.toLowerCase()
+    const beersCopy = this.state.allBeers.concat()
+
+    beersCopy.forEach((beer) => {
+      for (let beerProperty in beer) {
+        if ( beerProperty === 'name' && beer.name.toLowerCase().includes(beerToFind) ) {
+          // populate beers to show with beers matching search input
+          beer.isHidden = false
+          this.setState({
+            allBeers: beersCopy
+          })
+        } else if (beerProperty === 'name' && !beer.name.toLowerCase().includes(beerToFind)) {
+          beer.isHidden = true
+          this.setState({
+            allBeers: beersCopy
+          })
+        }
+      }
+    })
+  }
+
   render() {
     return (
       <div className = {classes.Main}>
@@ -174,6 +197,8 @@ class Main extends Component {
         <header>
           <h1>The Beer Bank</h1>
           <p>Find your favorite beer here</p>
+          <InstantSearch
+            instantlySearchForBeer = {this.instantlySearchForBeer}
           />
         </header>
         { this.state.beersAreLoading
