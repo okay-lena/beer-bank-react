@@ -191,7 +191,7 @@ class Main extends Component {
             <BeerModal
               beerId = {this.state.modalWindowState.currentBeerId}
               favoriteBeers = {this.state.favoriteBeers}
-              onStarClick = {this.state.onStarClick}
+              onStarClick = {this.onStarClickHandler}
               beers = {this.state.beers}
               isShown = {this.state.modalWindowState.isShown}
               showModalWindow = {this.showModalWindow}
