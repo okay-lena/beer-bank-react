@@ -11,7 +11,7 @@ const InstantSearch = props => {
           />
       </form>
       <span className={classes.advancedSearchLink}>
-        <a href="./advanced-search.html">Advanced Search</a>
+        <a href="./" onClick={(event) => props.showAdvancedHideInstant(event)}>Advanced Search</a>
       </span>
     </div>
   )

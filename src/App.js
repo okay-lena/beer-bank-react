@@ -5,10 +5,9 @@ import Main from './containers/Main/Main'
 
 function App() {
   return (
-      <Layout>
-          {/*here we will add routing*/}
-          <Main />
-      </Layout>
+    <Layout>
+      <Main />
+    </Layout>
   );
 }
 

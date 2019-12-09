@@ -1,0 +1,49 @@
+.AdvancedSearch {
+
+}
+
+form input {
+  padding-left: 5px;
+}
+
+form input[type=number] {
+  margin-right: 20px;
+  width: 100px;
+}
+
+form input[type=date] {
+  margin-right: 20px;
+  width: 150px;
+}
+
+form label {
+  margin-right: 10px;
+}
+
+.searchIbu, .searchAbv, .searchEbc, .searchBrewedDate {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type=submit] {
+    background-color: #666;
+    border-color: #666;
+    color: #fff;
+    display: block;
+    margin: auto;
+}
+
+form input[type=submit]:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.instantSearchLink {
+  display: block;
+  margin-top: 20px;
+}
+
+.instantSearchLink a {
+    color: #fff;
+    text-decoration: underline;
+}
