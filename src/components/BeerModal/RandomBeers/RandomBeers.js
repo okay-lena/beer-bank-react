@@ -9,20 +9,23 @@ const RandomBeers = props => {
         Math.floor(Math.random() * props.allBeers.length)
         );
   }
-  // console.log(props.beers);
+
   return (
     <div className={classes.RandomBeers}>
-      {randomBeerIndices.map((index, key) =>
-        <BeerCard
-          modalWindow = {props.modalWindow}
-          beer = {props.allBeers[index]}
-          allBeers = {props.allBeers}
-          key = {key}
-          favoriteBeers = {props.favoriteBeers}
-          onStarClick = {props.onStarClick}
-          showModalWindow = {props.showModalWindow}
-          hideModalWindow = {props.hideModalWindow}
-        />
+      {randomBeerIndices.map((index, key) => {
+          let beerToShow = {...props.allBeers[index]};
+          return <BeerCard
+            modalWindow = {props.modalWindow}
+            beer = {beerToShow}
+            allBeers = {props.allBeers}
+            key = {key}
+            favoriteBeers = {props.favoriteBeers}
+            isFavorite = {props.favoriteBeers.includes(beerToShow.id)}
+            onStarClick = {props.onStarClick}
+            showModalWindow = {props.showModalWindow}
+            hideModalWindow = {props.hideModalWindow}
+          />
+        }
       )}
     </div>
   )
