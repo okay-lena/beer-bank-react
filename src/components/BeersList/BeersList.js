@@ -5,11 +5,11 @@ import BeerCard from './BeerCard/BeerCard'
 const BeersList = props => {
   return (
     <div className={classes.BeersList}>
-      { props.allBeers.map((beer, index) => {
+      { props.beersToShow.map((beer, index) => {
         return (
           <BeerCard
             beer = {beer}
-            favoriteBeers = {props.favoriteBeers}
+            isFavorite = {props.favoriteBeers.includes(beer.id)}
             key = {index}
             onStarClick = {props.onStarClick}
             allBeers = {props.allBeers}
