@@ -23,7 +23,10 @@ const BeerModal = (props) => {
         <Container>
             <Row>
                 <Col xs="4">
-                  <img src={beer.image_url} className={classes.modalImg} alt={beer.name} />
+                  { beer.image_url
+                    ? <img src={beer.image_url} className={classes.modalImg} alt={beer.name} />
+                    : <img src='/stub-beer.png' className={classes.modalImg} alt={beer.name} />
+                  }
                 </Col>
                 <Col xs="8">
                   <span className={classes.detailsBeerName}>{beer.name}</span>

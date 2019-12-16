@@ -24,7 +24,10 @@ const BeerCard = props => {
         onClick = {(event) => props.onStarClick(event, props.beer.id)}>
         {starIcon}
       </span>
-      <img src={props.beer.image_url} alt={props.beer.name} />
+      { props.beer.image_url
+        ? <img src={props.beer.image_url} alt={props.beer.name} />
+        : <img src='/stub-beer.png' alt={props.beer.name} />
+      }
       <span className={classes.BeerCardName}>{props.beer.name}</span>
       <span className={classes.BeerCardTagline}>{props.beer.tagline}</span>
     </div>
