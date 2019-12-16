@@ -50,9 +50,13 @@ class Main extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get('https://api.punkapi.com/v2/beers')
+      let beersToGet = this.state.allBeers.concat()
+      for (let i = 1; i < 6; i ++) {
+        const response = await axios.get(`https://api.punkapi.com/v2/beers?page=${i}&per_page=80`)
+        beersToGet = beersToGet.concat(response.data)
+      }
       this.setState({
-        allBeers: response.data,
+        allBeers: beersToGet,
         beersAreLoading: false
       })
       this.loadFavoriteBeersFromLocalStorage()
