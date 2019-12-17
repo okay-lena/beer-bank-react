@@ -215,30 +215,19 @@ class Main extends Component {
   }
 
   getBrewedFrom = (event) => {
-    if ( isNaN(Date.parse(event.target.value)) ) {
-      this.setState({
-        brewedFrom: Date.parse("01/01/1970")
-      })
-    } else {
-      this.setState({
-        brewedFrom: Date.parse(event.target.value)
-      })
-    }
+    this.setState({
+      brewedFrom: event.target.value
+    })
   }
 
   getBrewedTo = (event) => {
-    if ( isNaN(Date.parse(event.target.value)) ) {
-      this.setState({
-        brewedTo: Date.parse("01/01/2100")
-      })
-    } else {
-      this.setState({
-        brewedTo: Date.parse(event.target.value)
-      })
-    }
+    this.setState({
+      brewedTo: event.target.value
+    })
   }
 
-  findBeers = (event) => {
+
+  findBeers_ = (event) => {
     event.preventDefault()
     const beersCopy = this.state.allBeers.concat()
     let beersToShow = []
@@ -266,6 +255,47 @@ class Main extends Component {
       console.log("There are no beers matching search criteria.");
     }
   }
+
+
+  async findBeers(event) {
+    event.preventDefault()
+    this.setState({
+      beersAreLoading: true
+    })
+
+    try {
+      const minIbu = this.state.minIbu
+      const maxIbu = this.state.maxIbu
+      const minAbv = this.state.minAbv
+      const maxAbv = this.state.maxAbv
+      const minEbc = this.state.minEbc
+      const maxEbc = this.state.maxEbc
+      const brewedFrom = this.state.brewedFrom
+      const brewedTo = this.state.brewedTo
+
+      const response = await axios.get(`https://api.punkapi.com/v2/beers/?
+        page=1&per_page=80&
+        ibu_gt=${minIbu}&ibu_lt=${maxIbu}&
+        abv_gt=${minAbv}&abv_lt=${maxAbv}&
+        ebc_gt=${minEbc}&ebc_lt=${maxEbc}&
+        brewed_after=${brewedFrom}&brewed_before=${brewedTo}
+        `)
+
+      this.setState({
+        beersToShow: response.data,
+        beersAreLoading: false
+      })
+
+      if (this.state.beersToShow.length === 0) {
+        alert("There are no beers matching search criteria.")
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
+  findBeers = this.findBeers.bind(this);
 
   showAdvancedHideInstant = (event) => {
     event.preventDefault()

@@ -25,9 +25,9 @@ const AdvancedSearch = props => {
         </span>
         <span className={classes.searchBrewedDate}>
           <label htmlFor="brewedFrom">Brewed from</label>
-            <input onChange={props.getBrewedFrom} type="date" defaultValue="2011-01-01" name="brewedFrom" />
+            <input onChange={props.getBrewedFrom} type="string" placeholder="try 01-2011" name="brewedFrom" />
           <label htmlFor="brewedTo">to</label>
-            <input onChange={props.getBrewedTo} type="date" defaultValue="2016-01-01" name="brewedTo" />
+            <input onChange={props.getBrewedTo} type="string" placeholder="try 01-2016" name="brewedTo" />
         </span>
         <span className={classes.searchBtn}>
           <input className="btn btn-primary btn-sm"

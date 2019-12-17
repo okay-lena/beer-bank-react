@@ -6,7 +6,9 @@ form input {
   padding-left: 5px;
 }
 
-form input[type=number] {
+form input[type=number],
+form input[type=string]
+ {
   margin-right: 20px;
   width: 100px;
 }
