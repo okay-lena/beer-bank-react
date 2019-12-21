@@ -22,56 +22,59 @@ import {
 
 class Main extends Component {
 
+  componentDidMount() {
+    this.props.fetchAllBeers()
+    this.props.loadFavoriteBeersFromLocalStorage()
   }
 
   render() {
     return (
       <div className = {classes.Main}>
         <TopMenu
-          showFavorites = {this.showFavorites}
-          showAllBeers = {this.showAllBeers}
+          showFavorites = {this.props.showFavorites}
+          showAllBeers = {this.props.showAllBeers}
           />
         <header>
           <h1>The Beer Bank</h1>
           <p>Find your favorite beer here</p>
-          { this.state.showInstantSearch
+          { this.props.showInstantSearch
             ? <InstantSearch
-                instantlySearchForBeer = {this.instantlySearchForBeer}
-                showAdvancedHideInstant = {this.showAdvancedHideInstant}
+                instantlySearchForBeer = {this.props.instantlySearchForBeer}
+                showAdvancedHideInstant = {this.props.showAdvancedHideInstant}
               />
             : <AdvancedSearch
-                findBeers = {this.findBeers}
-                getMinIbu = {this.getMinIbu}
-                getMaxIbu = {this.getMaxIbu}
-                getMinAbv = {this.getMinAbv}
-                getMaxAbv = {this.getMaxAbv}
-                getMinEbc = {this.getMinEbc}
-                getMaxEbc = {this.getMaxEbc}
-                getBrewedFrom = {this.getBrewedFrom}
-                getBrewedTo = {this.getBrewedTo}
-                hideAdvancedShowInstant = {this.hideAdvancedShowInstant}
+                findBeers = {this.props.findBeers}
+                getMinIbu = {this.props.getMinIbu}
+                getMaxIbu = {this.props.getMaxIbu}
+                getMinAbv = {this.props.getMinAbv}
+                getMaxAbv = {this.props.getMaxAbv}
+                getMinEbc = {this.props.getMinEbc}
+                getMaxEbc = {this.props.getMaxEbc}
+                getBrewedFrom = {this.props.getBrewedFrom}
+                getBrewedTo = {this.props.getBrewedTo}
+                hideAdvancedShowInstant = {this.props.hideAdvancedShowInstant}
               />
           }
         </header>
-        { this.state.beersAreLoading
+        { this.props.beersAreLoading
           ? <Loader />
           :
           <div className= {classes.container}>
             <BeersList
-              beersToShow = {this.state.beersToShow}
-              favoriteBeers = {this.state.favoriteBeers}
-              onStarClick = {this.onStarClickHandler}
-              showModalWindow = {this.showModalWindow}
-              hideModalWindow = {this.hideModalWindow}
+              beersToShow = {this.props.beersToShow}
+              favoriteBeers = {this.props.favoriteBeers}
+              onStarClick = {this.props.onStarClickHandler}
+              showModalWindow = {this.props.showModalWindow}
+              hideModalWindow = {this.props.hideModalWindow}
             />
             <BeerModal
-              beerId = {this.state.modalWindowState.currentBeerId}
-              favoriteBeers = {this.state.favoriteBeers}
-              onStarClick = {this.onStarClickHandler}
-              allBeers = {this.state.allBeers}
-              isShown = {this.state.modalWindowState.isShown}
-              showModalWindow = {this.showModalWindow}
-              hideModalWindow = {this.hideModalWindow}
+              beerId = {this.props.modalWindowState.currentBeerId}
+              favoriteBeers = {this.props.favoriteBeers}
+              onStarClick = {this.props.onStarClickHandler}
+              allBeers = {this.props.allBeers}
+              isShown = {this.props.modalWindowState.isShown}
+              showModalWindow = {this.props.showModalWindow}
+              hideModalWindow = {this.props.hideModalWindow}
             />
           </div>
         }
