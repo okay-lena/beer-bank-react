@@ -5,7 +5,7 @@ import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons' //regu
 import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons' // solid star
 
 const BeerCard = props => {
-
+  
   let starIcon = "";
   if ( props.isFavorite ) {
     starIcon = <FontAwesomeIcon icon={fasFaStar} color="orange" />

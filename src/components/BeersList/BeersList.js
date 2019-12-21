@@ -12,9 +12,9 @@ const BeersList = props => {
             isFavorite = {props.favoriteBeers.includes(beer.id)}
             key = {index}
             onStarClick = {props.onStarClick}
-            allBeers = {props.allBeers}
             showModalWindow = {props.showModalWindow}
             hideModalWindow = {props.hideModalWindow}
+            allBeers = {props.allBeers}
           />
         )
       }) }

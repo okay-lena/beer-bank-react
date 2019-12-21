@@ -6,7 +6,6 @@ import RandomBeers from './RandomBeers/RandomBeers'
 
 const BeerModal = (props) => {
 
-  // console.log(props.allBeers)
   const getBeerById = (id) => {
    for (let i = 0; i < props.allBeers.length; i++){
      if (props.allBeers[i].id === id) return props.allBeers[i]
