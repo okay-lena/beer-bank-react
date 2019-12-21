@@ -383,4 +383,48 @@ class Main extends Component {
   }
 }
 
-export default Main
+function mapStateToProps(state) {
+    return {
+      beersAreLoading: state.beersAreLoading,
+      favoriteBeers: state.favoriteBeers,
+      allBeers: state.allBeers,
+      beersToShow: state.beersToShow,
+      modalWindowState : state.modalWindowState,
+      showInstantSearch: state.showInstantSearch,
+      showAdvancedSearch: state.showAdvancedSearch,
+      minIbu: state.minIbu,
+      maxIbu: state.maxIbu,
+      minAbv: state.minAbv,
+      maxAbv: state.maxAbv,
+      minEbc: state.minEbc,
+      maxEbc: state.maxEbc,
+      brewedFrom: state.brewedFrom,
+      brewedTo: state.brewedTo
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAllBeers: () => dispatch(fetchAllBeers()),
+    loadFavoriteBeersFromLocalStorage: () => dispatch(loadFavoriteBeersFromLocalStorage()),
+    onStarClickHandler: (event, beerId) => dispatch(onStarClickHandler(event, beerId)),
+    showModalWindow: currentBeerId => dispatch(showModalWindow(currentBeerId)),
+    hideModalWindow: () => dispatch(hideModalWindow()),
+    showFavorites: (event) => dispatch(showFavorites(event)),
+    showAllBeers: (event) => dispatch(showAllBeers(event)),
+    showAdvancedHideInstant: (event) => dispatch(showAdvancedHideInstant(event)),
+    hideAdvancedShowInstant: (event) => dispatch(hideAdvancedShowInstant(event)),
+    instantlySearchForBeer: (event) => dispatch(instantlySearchForBeer(event)),
+    findBeers: (event) => dispatch(findBeers(event)),
+    getMinIbu: (event) => dispatch(getMinIbu(event)),
+    getMaxIbu: (event) => dispatch(getMaxIbu(event)),
+    getMinAbv: (event) => dispatch(getMinAbv(event)),
+    getMaxAbv: (event) => dispatch(getMaxAbv(event)),
+    getMinEbc: (event) => dispatch(getMinEbc(event)),
+    getMaxEbc: (event) => dispatch(getMaxEbc(event)),
+    getBrewedFrom: (event) => dispatch(getBrewedFrom(event)),
+    getBrewedTo: (event) => dispatch(getBrewedTo(event))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
