@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
 import classes from './Main.module.css'
+import {connect} from 'react-redux'
 import TopMenu from '../../components/TopMenu/TopMenu'
 import InstantSearch from '../../components/InstantSearch/InstantSearch'
 import AdvancedSearch from '../../components/AdvancedSearch/AdvancedSearch'
 import BeersList from '../../components/BeersList/BeersList'
 import BeerModal from '../../components/BeerModal/BeerModal'
-import axios from 'axios'
 import Loader from '../../components/Loader/Loader'
 
+import {
+  fetchAllBeers, loadFavoriteBeersFromLocalStorage, onStarClickHandler,
+  showModalWindow, hideModalWindow,
+  showFavorites, showAllBeers,
+  showAdvancedHideInstant, hideAdvancedShowInstant,
+  instantlySearchForBeer,
+  getMinIbu, getMaxIbu,
+  getMinAbv, getMaxAbv,
+  getMinEbc, getMaxEbc,
+  getBrewedFrom, getBrewedTo,
+  findBeers
+} from '../../store/actions/main'
 
 class Main extends Component {
   state = {
